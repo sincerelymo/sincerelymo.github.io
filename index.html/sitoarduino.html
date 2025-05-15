@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino Parcheggio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="CSS/arduino.css" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <h1>Arduino Parcheggio</h1>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#componenti">Componenti</a>
+        <a href="#codice">Codice</a>
+        <a href="#sketch">Sketch</a>
+    </nav>
+
+    <section id="home">
+        <h2>Benvenuto nel nostro progetto arduino!</h2>
+        <p>...</p>
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="https://www.youtube.com/watch?v=JGq4P2ai_gY" target="_blank" style="font-size: 18px; color: #4CAF50; text-decoration: none;">
+                Guarda il video del parcheggio in azione!
+            </a>
+        </div>
+    </section>
+
+    <section id="componenti">
+        <h2>Componenti Utilizzati</h2>
+        <ul>
+            <li>Arduino Uno</li>
+            <li>Sensori a ultrasuoni HC-SR04</li>
+            <li>Servo motore SG90</li>
+            <li>Display LCD 16x2</li>
+            <li>Display a 7 segmenti</li>
+            <li>Resistenze, jumper wire, breadboard</li>
+            <li>I2C Modulo scheda adattatore</li>
+        </ul>
+    </section>
+
+    <section id="codice">
+        <h2>Il Codice utilizzato nel progetto:</h2>
+        <p>
+            Il codice completo è su <a href="https://github.com/sincerelymo/ProgettoArduino/blob/main/ParcheggioArduino.c" target="_blank">GitHub</a>.
+        </p>
+    </section>
+
+    <section id="sketch">
+        <h2>Sketch del Progetto</h2>
+        <div class="sketch-container">
+            <img src="Arduino.png" alt="Sketch del Progetto">
+            <a href="https://www.tinkercad.com/things/lSwqjVTTzFJ-super-fyyran-sango/editel?returnTo=https%3A%2F%2Fwww.tinkercad.com%2Fdashboard" target="_blank">Visualizza lo sketch completo</a>
+        </div>
+    </section>
+
+    <script>
+        if (!location.hash) {
+            location.hash = '#home';
+        }
+    </script>
+
+</body>
+</html>
