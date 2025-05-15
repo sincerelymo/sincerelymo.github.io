@@ -1,224 +1,246 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Arduino Parcheggio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
-    <style>
-        body {
-            font-family: 'Open Sans', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            font-family: 'Roboto', sans-serif;
-        }
-        nav {
-            background-color: #333;
-            overflow: hidden;
-            text-align: center;
-        }
-        nav a {
-            display: inline-block;
-            color: #f2f2f2;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-            font-family: 'Roboto', sans-serif;
-        }
-        nav a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-        section {
-            padding: 20px;
-            display: none;
-            max-width: 800px;
-            margin: auto;
-            font-family: 'Open Sans', sans-serif;
-        }
-        section:target {
-            display: block;
-        }
-        #home:target ~ #home,
-        body:not(:has(section:target)) #home {
-            display: block;
-        }
-        .bottom-links {
-            position: fixed;
-            bottom: 20px;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 40px;
-        }
-        .bottom-links a img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-        .bottom-links a img:hover {
-            transform: scale(1.1);
-        }
-        .sketch-container {
-            text-align: center;
-            margin-top: 30px;
-        }
-        .sketch-container img {
-            width: 80%;
-            max-width: 600px;
-            height: auto;
-        }
-        .sketch-container a {
-            display: block;
-            margin-top: 15px;
-            font-size: 18px;
-            text-decoration: none;
-            color: #4CAF50;
-            font-family: 'Roboto', sans-serif;
-        }
-        .sketch-container a:hover {
-            color: #45a049;
-        }
-        #codice p {
-            font-family: 'Courier New', Courier, monospace;
-            white-space: pre-wrap;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arduino Parcheggio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      font-family: 'Roboto', sans-serif;
+    }
+    nav {
+      background-color: #333;
+      overflow: hidden;
+      text-align: center;
+    }
+    nav a {
+      display: inline-block;
+      color: #f2f2f2;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+      font-family: 'Roboto', sans-serif;
+    }
+    nav a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+    section {
+      padding: 20px;
+      display: none;
+      max-width: 800px;
+      margin: auto;
+      font-family: 'Open Sans', sans-serif;
+    }
+    section:target {
+      display: block;
+    }
+    #home:target ~ #home,
+    body:not(:has(section:target)) #home {
+      display: block;
+    }
+    .bottom-links {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+    .bottom-links a img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+    .bottom-links a img:hover {
+      transform: scale(1.1);
+    }
+    .sketch-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .sketch-container img {
+      width: 80%;
+      max-width: 600px;
+      height: auto;
+    }
+    .sketch-container a {
+      display: block;
+      margin-top: 15px;
+      font-size: 18px;
+      text-decoration: none;
+      color: #4CAF50;
+      font-family: 'Roboto', sans-serif;
+    }
+    .sketch-container a:hover {
+      color: #45a049;
+    }
+    #codice p {
+      font-family: 'Courier New', Courier, monospace;
+      white-space: pre-wrap;
+    }
 
-        /* Titoli sezioni Componenti */
-        #componenti h2 {
-            color: black;
-            font-family: 'Roboto', sans-serif;
-            font-weight: 700;
-            font-size: 2.2rem;
-            text-align: center;
-            margin-bottom: 25px;
-            border-bottom: 3px solid #4CAF50;
-            padding-bottom: 10px;
-        }
+    #componenti h2 {
+      color: black;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 700;
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 25px;
+      border-bottom: 3px solid #4CAF50;
+      padding-bottom: 10px;
+    }
 
-        /* Titoli sezioni Codice e Sketch più belli */
-        #codice h2,
-        #sketch h2 {
-            font-size: 2rem;
-            color: #222;
-            text-align: center;
-            font-family: 'Roboto', sans-serif;
-            border-bottom: 2px solid #4CAF50;
-            padding-bottom: 8px;
-            margin-bottom: 25px;
-            font-weight: 600;
-        }
+    #codice h2,
+    #sketch h2,
+    #progettazione h2 {
+      font-size: 2rem;
+      color: #222;
+      text-align: center;
+      font-family: 'Roboto', sans-serif;
+      border-bottom: 2px solid #4CAF50;
+      padding-bottom: 8px;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
 
-        /* Liste con puntini e margini più piccoli nella home */
-        #home ul {
-            list-style-type: disc;
-            margin-left: 5px;  /* modificato da 40px a 15px */
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        #home ul ul {
-            list-style-type: disc;
-            margin-left: 5px; /* modificato da 30px a 10px */
-        }
+    #home ul {
+      list-style-type: disc;
+      margin-left: 25px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
 
-        /* Spaziatura paragrafi nella home */
-        #home p {
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-    </style>
+    #home ul ul {
+      list-style-type: disc;
+      margin-left: 25px;
+    }
+
+    #home p {
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <h1>Arduino Parcheggio</h1>
-    </header>
+<header>
+  <h1>Arduino Parcheggio</h1>
+</header>
 
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#componenti">Componenti</a>
-        <a href="#codice">Codice</a>
-        <a href="#sketch">Sketch</a>
-    </nav>
+<nav>
+  <a href="#home">Home</a>
+  <a href="#componenti">Componenti</a>
+  <a href="#progettazione">Progettazione</a>
+  <a href="#codice">Codice</a>
+  <a href="#sketch">Sketch</a>
+</nav>
 
-    <section id="home">
-        <h2>Benvenuto nel nostro progetto Arduino!</h2>
-        <p>
-            Questo progetto è un sistema automatizzato per la gestione di un parcheggio, basato su Arduino.
-            Utilizza sensori a ultrasuoni per rilevare l’ingresso e l’uscita delle auto, aggiornando automaticamente il numero di posti disponibili.
-        </p>
+<section id="home">
+  <h2>Benvenuto nel nostro progetto Arduino!</h2>
+  <p>
+    Questo progetto è un sistema automatizzato per la gestione di un parcheggio, basato su Arduino.
+    Utilizza sensori a ultrasuoni per rilevare l’ingresso e l’uscita delle auto, aggiornando automaticamente il numero di posti disponibili.
+  </p>
 
-        <p>Il sistema comunica con l’utente tramite:</p>
-        <ul>
-            <li>
-                Un display LCD che mostra messaggi come “Aperto”, “Chiuso”, “Pieno” o il numero di posti disponibili.
-            </li>
-            <li>
-                Un display a 7 segmenti che indica in modo semplice quanti posti sono rimasti.
-            </li>
-            <li>
-                Tre LED:
-                <ul>
-                    <li>LED verde: si accende quando il cancello è aperto.</li>
-                    <li>LED rosso: si accende quando il cancello è chiuso.</li>
-                    <li>LED bianco: ha una funzione estetica, simula un palo della luce che illumina la zona del cancello e rende la scena più realistica.</li>
-                </ul>
-            </li>
-        </ul>
+  <p>Il sistema comunica con l’utente tramite:</p>
+  <ul>
+    <li>Display LCD: mostra messaggi come “Aperto”, “Chiuso” o il numero di posti disponibili.</li>
+    <li>Display a 7 segmenti: mostra i posti liberi in modo semplice.</li>
+    <li>Tre LED:
+      <ul>
+        <li>Verde: indica che il cancello è aperto.</li>
+        <li>Rosso: indica che è chiuso.</li>
+        <li>Bianco: simula un palo della luce per realismo.</li>
+      </ul>
+    </li>
+  </ul>
 
-        <p>
-            Il sistema gestisce tutto in modo automatico e intelligente, riconoscendo quando un’auto entra o esce e aggiornando il conteggio dei posti in tempo reale.
-            Quando un’auto esce, il cancello si apre per farla uscire e il numero dei posti disponibili aumenta di uno.
-        </p>
-        <p>
-            È un progetto pratico che unisce componenti semplici e facilmente reperibili come sensori a ultrasuoni, servo, LED e display, e che dimostra come Arduino possa essere usato per realizzare applicazioni concrete e utili nella vita quotidiana.
-        </p>
+  <p>
+    Il sistema gestisce tutto in modo automatico e intelligente, riconoscendo quando un’auto entra o esce e aggiornando il conteggio dei posti in tempo reale.
+  </p>
 
-        <div style="text-align: center; margin-top: 30px;">
-            <a href="https://www.youtube.com/watch?v=JGq4P2ai_gY" target="_blank" style="font-size: 18px; color: #4CAF50; text-decoration: none;">
-                Guarda il video del parcheggio in azione!
-            </a>
-        </div>
-    </section>
+  <p>
+    È un progetto pratico che unisce componenti semplici e dimostra come Arduino possa essere usato per realizzare applicazioni concrete e utili nella vita quotidiana.
+  </p>
 
-    <section id="componenti">
-        <h2>Componenti Utilizzati</h2>
-        <ul>
-            <li>Arduino Uno <br><img src="arduinouno.jpg" alt="Arduino Uno" style="max-width:150px; margin-top:5px;"></li>
-            <li>Sensori a ultrasuoni HC-SR04 <br><img src="sensore.jpeg" alt="Sensore Ultrasuoni HC-SR04" style="max-width:150px; margin-top:5px;"></li>
-            <li>Servo motore SG90 <br><img src="servomotore.webp" alt="Servo motore SG90" style="max-width:150px; margin-top:5px;"></li>
-            <li>Display LCD 16x2 <br><img src="lcd.webp" alt="Display LCD 16x2" style="max-width:150px; margin-top:5px;"></li>
-            <li>Display a 7 segmenti <br><img src="display_7_segmenti.jpg" alt="Display a 7 segmenti" style="max-width:150px; margin-top:5px;"></li>
-            <li>Breadboard <br><img src="breadboard.jpg" alt="Breadboard" style="max-width:150px; margin-top:5px;"></li>
-            <li>LED (verde, rosso o bianco) <br><img src="LED.webp" alt="LED" style="max-width:150px; margin-top:5px;"></li>
-            <li>Resistenze <br><img src="resistenza.jpg" alt="Resistenze" style="max-width:150px; margin-top:5px;"></li>
-            <li>Jumper wires <br><img src="jumper_wires.jpg" alt="Jumper wires" style="max-width:150px; margin-top:5px;"></li>
-            <li>I2C Modulo scheda adattatore <br><img src="I2C.jpg" alt="Modulo I2C" style="max-width:150px; margin-top:5px;"></li>
-        </ul>
-    </section>
+  <div style="text-align: center; margin-top: 30px;">
+    <a href="https://www.youtube.com/watch?v=JGq4P2ai_gY" target="_blank" style="font-size: 18px; color: #4CAF50; text-decoration: none;">
+      Guarda il video del parcheggio in azione!
+    </a>
+  </div>
+</section>
 
-    <section id="codice">
-        <h2>Il Codice utilizzato nel progetto:</h2>
-        <p>
-            Il codice completo è su <a href="https://github.com/sincerelymo/ProgettoArduino/blob/main/ParcheggioArduino.c" target="_blank">GitHub</a>.
-        </p>
-    </section>
+<section id="componenti">
+  <h2>Componenti Utilizzati</h2>
+  <ul>
+    <li>Arduino Uno <br><img src="immagini/arduinouno.jpg" alt="Arduino Uno" style="max-width:150px;"></li>
+    <li>Sensori a ultrasuoni HC-SR04 <br><img src="immagini/sensore.jpeg" alt="Ultrasuoni" style="max-width:150px;"></li>
+    <li>Servo motore SG90 <br><img src="immagini/servomotore.webp" alt="Servo SG90" style="max-width:150px;"></li>
+    <li>Display LCD 16x2 <br><img src="immagini/lcd.webp" alt="LCD 16x2" style="max-width:150px;"></li>
+    <li>Display a 7 segmenti <br><img src="immagini/display7.jpeg" alt="Display 7 segmenti" style="max-width:150px;"></li>
+    <li>Breadboard <br><img src="immagini/breadboard.jpg" alt="Breadboard" style="max-width:150px;"></li>
+    <li>LED (verde, rosso o bianco) <br><img src="immagini/LED.webp" alt="LED" style="max-width:150px;"></li>
+    <li>Resistenze <br><img src="immagini/resistenza.jpg" alt="Resistenze" style="max-width:150px;"></li>
+    <li>Jumper wires <br><img src="immagini/jumperwires.jpeg" alt="Jumper wires" style="max-width:150px;"></li>
+    <li>I2C Modulo <br><img src="immagini/I2C.jpg" alt="I2C Modulo" style="max-width:150px;"></li>
+  </ul>
+</section>
 
-    <section id="sketch">
-        <h2>Sketch del Progetto</h2>
-        <div class="sketch-container">
-            <img src="Arduino.png" alt="Sketch del Progetto" />
-            <a href="https://www.tinkercad.com/things/lSwqjVTTzFJ-super-fyyran-sango/editel?returnTo=https%3A%2F%2Fwww.tinkercad.com%2Fdashboard" target="_blank">Visualizza lo sketch completo</a>
-        </div>
-    </section>
+<section id="progettazione">
+  <h2>Fasi della Progettazione</h2>
+  <p>
+    Il progetto è nato con tre componenti fondamentali: un sensore a ultrasuoni per rilevare le auto, un servo motore per il cancello, e un display LCD per mostrare lo stato (“Aperto” o “Chiuso”).
+  </p>
+  <p>
+    Successivamente abbiamo integrato due LED: uno verde per indicare quando il cancello è aperto e uno rosso per quando è chiuso, simulando così un semaforo.
+  </p>
+  <p>
+    Abbiamo poi aggiunto la gestione degli spazi del parcheggio (inizialmente 5 posti). Il numero dei posti diminuiva a ogni ingresso e veniva segnalato quando il parcheggio era pieno.
+  </p>
+  <p>
+    Per migliorare la funzionalità, abbiamo aggiunto un secondo sensore a ultrasuoni all’uscita per rilevare quando una macchina esce, così da incrementare nuovamente i posti disponibili.
+    Per gestire il numero crescente di componenti, abbiamo utilizzato un adattatore I2C per il display LCD, liberando così dei pin digitali.
+  </p>
+  <p>
+    In seguito abbiamo introdotto un display a 7 segmenti per mostrare il numero dei posti disponibili in modo chiaro, mentre l’LCD mostra una freccia che punta verso il display.
+  </p>
+  <p>
+    Infine, per aggiungere realismo e un tocco estetico, abbiamo incluso una luce LED bianca che simula un palo della luce sopra il cancello.
+  </p>
+
+  <div style="text-align:center; margin-top: 30px;">
+    <img src="immagini/sketch_iniziale.jpg" alt="Sketch Iniziale" style="max-width:90%; margin-bottom: 20px;">
+    <img src="immagini/prodotto_finale.jpg" alt="Prodotto Finale" style="max-width:90%;">
+  </div>
+</section>
+
+<section id="codice">
+  <h2>Il Codice utilizzato nel progetto:</h2>
+  <p>
+    Il codice completo è disponibile su <a href="https://github.com/sincerelymo/ProgettoArduino/blob/main/ParcheggioArduino.c" target="_blank">GitHub</a>.
+  </p>
+</section>
+
+<section id="sketch">
+  <h2>Sketch del Progetto</h2>
+  <div class="sketch-container">
+    <img src="immagini/Arduino.png" alt="Sketch del progetto" />
+    <a href="https://www.tinkercad.com/things/lSwqjVTTzFJ-super-fyyran-sango/editel?returnTo=https%3A%2F%2Fwww.tinkercad.com%2Fdashboard" target="_blank">Visualizza lo sketch completo</a>
+  </div>
+</section>
 
 </body>
 </html>
