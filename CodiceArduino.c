@@ -306,7 +306,7 @@ void visualizzaCifra(int cifra) {
 }
 
 // Calcola il bit di parità pari di un byte
-int calcolaParitaSemplice(byte dati) {
+int calcolaParita(byte dati) {
   int bitCount = 0;
   // Conta quanti bit sono a 1
   for (int i = 0; i < 8; i++) {
@@ -324,7 +324,7 @@ int calcolaParitaSemplice(byte dati) {
 
 // Aggiunge il bit di parità alla fine del byte
 byte aggiungiParitaSemplice(byte dati) {
-  int bitParita = calcolaParitaSemplice(dati);
+  int bitParita = calcolaParita(dati);
   // Sposta dati a sinistra per fare spazio al bit di parità e lo aggiunge
   return (dati << 1) | bitParita;
 }
