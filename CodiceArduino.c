@@ -44,7 +44,7 @@ bool autoRilevataIngresso = false;
 bool autoRilevataUscita = false;
 unsigned long ultimoRilevamentoIngresso = 0;
 unsigned long ultimoRilevamentoUscita = 0;
-const unsigned long tempoDebounce = 3000;
+const int tempoDebounce = 3000;
 
 void setup() {
   pinMode(trigIngresso, OUTPUT);
