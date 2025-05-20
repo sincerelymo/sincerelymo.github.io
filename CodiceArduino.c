@@ -323,7 +323,7 @@ int calcolaParita(byte dati) {
 }
 
 // Aggiunge il bit di parità alla fine del byte
-byte aggiungiParitaSemplice(byte dati) {
+byte aggiungiParita(byte dati) {
   int bitParita = calcolaParita(dati);
   // Sposta dati a sinistra per fare spazio al bit di parità e lo aggiunge
   return (dati << 1) | bitParita;
