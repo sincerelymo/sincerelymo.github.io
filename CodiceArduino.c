@@ -276,15 +276,16 @@ void loop() {
     lcd.write(45);  // -
     lcd.write(62);  // >
   }
-
+  
   byte dati = postiDisponibili;
-  bool paritaPari = true;
-  byte datiConParita = aggiungiParita(dati, paritaPari);
+  uint16_t datiConParita = aggiungiParita(dati);
 
   Serial.print("Dati con parità: ");
-  Serial.println(datiConParita, BIN);
+  for (int i = 15; i >= 0; i--) {
+  Serial.print(bitRead(datiConParita, i));
+  }
+  Serial.println();
 
-  delay(100);
 }
 
 long misuraDistanza(int trig, int echo) {
@@ -322,9 +323,9 @@ int calcolaParita(byte dati) {
   }
 }
 
-// Aggiunge il bit di parità alla fine del byte
-byte aggiungiParita(byte dati) {
+// Aggiunge il bit di parità alla fine del byte, preservando tutti i bit originali
+uint16_t aggiungiParita(byte dati) {
   int bitParita = calcolaParita(dati);
-  // Sposta dati a sinistra per fare spazio al bit di parità e lo aggiunge
-  return (dati << 1) | bitParita;
+  // Passa dati a uint16_t, shift a sinistra di 1 e OR col bit di parità
+  return ((uint16_t)dati << 1) | bitParita;
 }
