@@ -310,7 +310,7 @@ int calcolaParitaSemplice(byte dati) {
   int bitCount = 0;
   // Conta quanti bit sono a 1
   for (int i = 0; i < 8; i++) {
-    if ((dati >> i) & 1) {  // sposta dati a destra e controlla il bit meno significativo
+    if (dati & (1 << i)) { 
       bitCount++;
     }
   }
