@@ -305,18 +305,26 @@ void visualizzaCifra(int cifra) {
   }
 }
 
-int calcolaParita(byte dati, bool paritaPari) {
+// Calcola il bit di parità pari di un byte
+int calcolaParitaSemplice(byte dati) {
   int bitCount = 0;
+  // Conta quanti bit sono a 1
   for (int i = 0; i < 8; i++) {
-    if (dati & (1 << i)) {
+    if ((dati >> i) & 1) {  // sposta dati a destra e controlla il bit meno significativo
       bitCount++;
     }
   }
-  return paritaPari ? (bitCount % 2 == 0 ? 0 : 1) : (bitCount % 2 == 0 ? 1 : 0);
+  // Se il numero di 1 è pari, bit di parità = 0, altrimenti = 1
+  if (bitCount % 2 == 0) {
+    return 0;
+  } else {
+    return 1;
+  }
 }
 
-byte aggiungiParita(byte dati, bool paritaPari) {
-  int bitParita = calcolaParita(dati, paritaPari);
-  byte datiConParita = (dati << 1) | bitParita;
-  return datiConParita;
+// Aggiunge il bit di parità alla fine del byte
+byte aggiungiParitaSemplice(byte dati) {
+  int bitParita = calcolaParitaSemplice(dati);
+  // Sposta dati a sinistra per fare spazio al bit di parità e lo aggiunge
+  return (dati << 1) | bitParita;
 }
