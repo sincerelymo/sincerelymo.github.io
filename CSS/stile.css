@@ -103,7 +103,7 @@ body:not(:has(section:target)) #home {
   color: black;
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
-  font-size: 2.2rem;
+  font-size: 36px;
   text-align: center;
   margin-bottom: 25px;
   border-bottom: 3px solid #4CAF50;
@@ -113,7 +113,7 @@ body:not(:has(section:target)) #home {
 #codice h2,
 #sketch h2,
 #progettazione h2 {
-  font-size: 2rem;
+  font-size: 32px;
   color: #222;
   text-align: center;
   font-family: 'Roboto', sans-serif;
